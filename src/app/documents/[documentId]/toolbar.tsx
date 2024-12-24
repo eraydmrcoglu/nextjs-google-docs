@@ -3,12 +3,8 @@
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/use-editor-store";
-
-// types
 import { type ColorResult, SketchPicker } from "react-color";
 import { type Level } from "@tiptap/extension-heading";
-
-// icons
 import {
   BoldIcon,
   ItalicIcon,
@@ -37,7 +33,6 @@ import {
   PlusIcon,
   ListCollapseIcon,
 } from "lucide-react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,7 +42,6 @@ import {
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
 import {
   Dialog,
   DialogContent,

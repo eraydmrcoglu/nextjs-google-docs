@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-// icons
 import { BsFilePdf } from "react-icons/bs";
 import {
   BoldIcon,
@@ -23,7 +21,6 @@ import {
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
-
 import { RenameDialog } from "@/components/rename-dialog";
 // import { RemoveDialog } from "@/components/remove-dialog";
 import {
@@ -38,9 +35,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-
 import { Avatars } from "./avatars";
-
 import { DocumentInput } from "./document-input";
 import { useEditorStore } from "@/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
@@ -166,15 +161,6 @@ export const Navbar = ({ data }: NavbarProps) => {
                       Rename
                     </MenubarItem>
                   </RenameDialog>
-                  {/* <RemoveDialog documentId={data._id}>
-                    <MenubarItem
-                      onClick={(e) => e.stopPropagation()}
-                      onSelect={(e) => e.preventDefault()}
-                    >
-                      <TrashIcon className="mr-2 size-4" />
-                      Remove
-                    </MenubarItem>
-                  </RemoveDialog> */}
                   <MenubarSeparator />
                   <MenubarItem onClick={() => window.print()}>
                     <PrinterIcon className="mr-2 size-4" />
