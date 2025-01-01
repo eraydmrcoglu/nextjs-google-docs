@@ -1,5 +1,7 @@
 "use client";
 
+import axios from 'axios';
+
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/use-editor-store";
@@ -269,7 +271,7 @@ const AlignButton = () => {
   );
 };
 
-const ImageButton = () => {
+const ImageButton = async () => {
   const { editor } = useEditorStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -285,12 +287,27 @@ const ImageButton = () => {
     input.type = "file";
     input.accept = "image/*";
 
-    input.onchange = (e) => {
+    input.onchange = async (e) => {
       const file = (e.target as HTMLInputElement).files?.[0];
-
       if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        onChange(imageUrl);
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", `${process.env.CLOUDINARY_UPLOAD_PRESET}`); // Cloudinary upload preset must be un-signed
+
+        try {
+          const responseFromCloudinary = await axios.post(
+            `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_ENDPOINT}/image/upload`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          onChange(responseFromCloudinary.data.secure_url);
+        } catch (error) {
+          console.error("Image upload failed:", error);
+        }
       }
     };
 
